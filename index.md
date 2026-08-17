@@ -5,8 +5,6 @@ hide: true
 show_reading_time: false
 ---
 
-Hi! My name is [Your Full Name]
-
 ### Development Environment
 
 
