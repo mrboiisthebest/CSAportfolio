@@ -153,7 +153,35 @@ for example if I had a run() method in the vehicle in the car i can create my ow
 ### Explanations
 
 ```java
-
+interface HasMotor{
+    public void StartMotor();
+    public void StopMotor();
+}
 ```
+
+
+```java
+class CarTwo extends VehicleTwo implements HasMotor{
+    
+    @Override 
+    public void Start(){
+        this.StartMotor();
+    }
+
+    @Override 
+    public void StartMotor(){
+        System.out.println("Starting Motor!");
+    }
+
+    @Override 
+    public void StopMotor(){
+        System.out.println("Stopped Motor!");
+    }
+}
+```
+
+
+I can also use abstract vehicle just implments and interface is another cool way.
+
 
 Explanation Here
