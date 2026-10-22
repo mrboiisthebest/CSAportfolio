@@ -3,7 +3,6 @@ layout: post
 title: Example Fullstack Feature
 description: Guide to the backend development of you're feature
 permalink: /fullstack/java/example
-menu: nav/fullstack_java.html
 toc: True
 comments: True
 author: Finn Carpenter

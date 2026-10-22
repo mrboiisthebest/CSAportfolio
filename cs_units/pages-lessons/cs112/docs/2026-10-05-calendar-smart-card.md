@@ -32,21 +32,17 @@ It sets itself up:
 
 This card uses real data: the CSA calendar if you're signed in, otherwise the school week.
 
-{% include ocs_calendar_card.html course="csa" %}
 
 ## Sample week
 
 The cards below use `sample="true"`, so you can see a full week of events without signing in. Nothing is saved.
 
-{% include ocs_calendar_card.html course="csa" sample=true %}
 
 ### In a narrow space
 
 The same card in a two-column layout, the width of a sidebar. On the right is CSP, which meets in periods 3 and 4. The card shows events for both periods. Open an event to see which period it is for: the office hours is only for period 4.
 
 <div class="ocs__split">
-{% include ocs_calendar_card.html course="csa" sample=true %}
-{% include ocs_calendar_card.html course="csp" sample=true %}
 </div>
 
 ## Options

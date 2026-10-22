@@ -40,7 +40,6 @@ The toolbar has demo toggles:
 
 **Preview** (the default) uses a sample week stored in your browser, so nothing reaches the class or the real calendar. **Reset** restores the sample. **Live** needs a sign-in. It posts to a separate demo chat for the chosen class (for example `csa-announcements-demo`) and adds real events to that class's calendar.
 
-{% include announcement_calendar_demo.html course="csa" %}
 
 ## Questions for feedback
 

@@ -7,4 +7,3 @@ curriculum_group: cs113
 categories: [Java, CS113]
 ---
 
-{% include projects/lessons/csa-curriculum.html %}

@@ -3,7 +3,6 @@ layout: post
 title: Design a Fullstack Feature
 description: Starting the project with brainstorming and visualizing of features is an important step in the development process. This article will introduce you through the design process of a fullstack feature.
 permalink: /fullstack/java/design
-menu: nav/fullstack_java.html
 toc: True
 comments: True
 author: Finn Carpenter
