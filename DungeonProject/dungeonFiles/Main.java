@@ -2,14 +2,13 @@ package DungeonProject.dungeonFiles;
 
 public class Main{
     public static void main(String[] args) {
-       Tile.GenerateTiles(3, 5);
-       Tile.PrintTileMap();
+        Tile.GenerateRandomTiles(3, 5);
 
-       Tile testTile = new Tile("LAVA");
-       testTile.SetPos(2, 3);
-       Tile.PutTile(testTile);
-       testTile.PrintDebug();
+        Tile testTile = new Tile("LAVA");
+        testTile.SetPos(1, 2);
+        Tile.PutTile(testTile);
 
-       Tile.PrintTileMap();
+        testTile.PrintDebug();
+        Tile.PrintTileMap();
     }
 }

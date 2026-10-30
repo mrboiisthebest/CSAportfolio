@@ -7,6 +7,12 @@ public class Tile{
 
     static Tile[][] Tiles = {};
 
+    // Directions
+    static final String UP = "up";
+    static final String DOWN = "down";
+    static final String LEFT = "left";
+    static final String RIGHT = "right";
+
     static final HashMap<String, Integer> VALID_TYPES = new HashMap<>(Map.of(
         "WALL", -1,
         "EXIT", 0,
@@ -39,7 +45,7 @@ public class Tile{
     }
 
     public void SetPos(int x, int y){
-        if (y < 0 || y >= Tiles.length || x < 0 || x >= Tiles[y].length){ return; }
+        if (y < 0 || y >= Tiles.length || x < 0 || x >= Tiles[y].length){ throw new IllegalArgumentException("Invalid Position!"); }
         this.xPos = x;
         this.yPos = y;
     }
@@ -52,6 +58,10 @@ public class Tile{
         System.out.println("Cost:" + this.cost + " Type:" + this.type + " X:" + this.xPos + " Y:" + this.yPos);
     }
 
+    public boolean GetWalkable(){
+        return this.cost >= 0;
+    }
+
 
     public static Tile GetTile(int x, int y){
         if (y < 0 || y >= Tiles.length || x < 0 || x >= Tiles[y].length){
@@ -60,7 +70,7 @@ public class Tile{
         return Tiles[y][x];
     }
 
-    public static void GenerateTiles(int width, int height){
+    public static void GenerateEmptyTiles(int width, int height){
         Tiles = new Tile[height][width];
         for (int i = 0; i < height; i++){
             for (int k = 0; k < width; k++){
@@ -70,6 +80,53 @@ public class Tile{
             }
         }
     }
+
+    public static String GetRandTileType(){
+        String[] types = VALID_TYPES.keySet().toArray(new String[0]);
+        int index = (int)(Math.random() * types.length);
+        return types[index];
+    }
+
+    public static boolean TileMapIncludes(String type){
+        for (Tile[] row : Tiles){
+            for (Tile x : row){
+                if (x.type.equals(type)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void GenerateRandomTiles(int width, int height){
+        Tiles = new Tile[height][width];
+        boolean exitPlaced = false;
+
+
+        for (int i = 0; i < height; i++){
+            for (int k = 0; k < width; k++){
+                String randType = GetRandTileType();
+
+                if (randType.equals("EXIT")){
+                    if (exitPlaced){
+                        randType = "FLOOR";
+                    }
+                    exitPlaced = true;
+                }
+
+                Tile tile = new Tile(randType);
+                tile.SetPos(k, i);
+                PutTile(tile);
+            }
+        }
+
+        if (!exitPlaced){
+            Tile exitTile = new Tile("EXIT");
+            exitTile.SetPos(width - 1, height - 1); // makes exit tile on the last tile
+            PutTile(exitTile);
+        }
+    }
+
 
     public static void PrintTileMap(){
         for (int y = 0; y < Tiles.length; y++){
@@ -85,10 +142,34 @@ public class Tile{
     }
 
     public static void RemoveTile(Tile tile){
-        Tiles[tile.yPos][tile.xPos] = new Tile();
+        Tile replacment = new Tile();
+        replacment.SetPos(tile.xPos, tile.yPos);
+        Tiles[tile.yPos][tile.xPos] = replacment;
+
     }
 
+    public static HashMap<String, Tile> GetNeighbors(int x, int y){
+        HashMap<String, Tile> neighbors = new HashMap<>();
 
+        // Neighbors
+        Tile upTile = Tile.GetTile(x, y - 1);
+        Tile downTile = Tile.GetTile(x, y + 1);
+        Tile leftTile = Tile.GetTile(x - 1, y);
+        Tile rightTile = Tile.GetTile(x + 1, y);
 
+        if (upTile != null) {
+            neighbors.put(Tile.UP, upTile);
+        }
+        if (downTile != null) {
+            neighbors.put(Tile.DOWN, downTile);
+        }
+        if (leftTile != null) {
+            neighbors.put(Tile.LEFT, leftTile);
+        }
+        if (rightTile != null) {
+            neighbors.put(Tile.RIGHT, rightTile);
+        }
 
+        return neighbors;
+    }
 }
