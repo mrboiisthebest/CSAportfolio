@@ -92,7 +92,7 @@ public class Tile{
     }
 
     public void RemoveInhabitant(String target){
-        if (!this.inhabitants.contains(target)){
+        if (this.inhabitants.contains(target)){
             this.inhabitants.remove(target);
         }
     }
@@ -151,6 +151,18 @@ public class Tile{
             Tile exitTile = new Tile("EXIT");
             exitTile.SetPos(width - 1, height - 1); // makes exit tile on the last tile
             PutTile(exitTile);
+        }
+    }
+
+    public static void GenerateFromArray(String[][] array){
+        Tiles = new Tile[array.length][array[0].length];
+
+        for (int y = 0; y < array.length; y++){
+            for (int x = 0; x < array[y].length; x++){
+                Tile tile = new Tile(array[y][x]);
+                tile.SetPos(x, y);
+                PutTile(tile);
+            }
         }
     }
 
