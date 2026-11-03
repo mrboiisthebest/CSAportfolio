@@ -1,5 +1,6 @@
 package DungeonProject.dungeonFiles;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Tile{
     public String type;
     int xPos;
     int yPos;
-    //Hashmap<String, T> inhabitats;
+    ArrayList<String> inhabitants = new ArrayList<>();
 
     public Tile(){
         this.cost = 1;
@@ -68,6 +69,32 @@ public class Tile{
             return null;
         }
         return Tiles[y][x];
+    }
+
+    public Tile GetTileFromDir(String Dir){
+        //Get neighbors, reurn neighbor of dir
+        HashMap<String, Tile> neighbors = GetNeighbors(this.xPos, this.yPos);
+        Tile target = neighbors.get(Dir);
+        if (target == null){
+            return null;
+        }
+        return target;
+    }
+
+    public ArrayList<String> GetInhabitants(){
+        return this.inhabitants;
+    }
+
+    public void AddInhabitant(String target){
+        if (!this.inhabitants.contains(target)){
+            this.inhabitants.add(target);
+        }
+    }
+
+    public void RemoveInhabitant(String target){
+        if (!this.inhabitants.contains(target)){
+            this.inhabitants.remove(target);
+        }
     }
 
     public static void GenerateEmptyTiles(int width, int height){
@@ -131,7 +158,12 @@ public class Tile{
     public static void PrintTileMap(){
         for (int y = 0; y < Tiles.length; y++){
             for (int x = 0; x < Tiles[y].length; x++){
-                System.out.print(Tiles[y][x].type.charAt(0) + " ");
+                Tile target = Tiles[y][x];
+                if (!target.GetInhabitants().isEmpty()){
+                    System.out.print("# ");
+                    continue;
+                }
+                System.out.print(target.type.charAt(0) + " ");
             }
             System.out.println();
         }

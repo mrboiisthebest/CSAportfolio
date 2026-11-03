@@ -7,6 +7,7 @@ public class Main{
         Tile testTile = new Tile("LAVA");
         testTile.SetPos(1, 2);
         Tile.PutTile(testTile);
+        testTile.AddInhabitant("Player");
 
         testTile.PrintDebug();
         Tile.PrintTileMap();
